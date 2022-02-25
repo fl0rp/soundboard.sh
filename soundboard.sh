@@ -9,11 +9,11 @@ play() {
         > /dev/null &
 }
 
-play-stop() {
+play_stop() {
     curl -s "${url}/stop" --data '' > /dev/null &
 }
 
-play-selection()
+play_selection()
 {
     group=$(echo "$1" | cut -f 1 -d '/');
     sound=$(echo "$1" | cut -f 2 -d '/');
@@ -21,13 +21,13 @@ play-selection()
 }
 
 if [ $# -eq 1 ] && [ $1 == '-s' ]; then
-    play-stop
+    play_stop
     exit
 fi
 
 if [ $# -gt 1 ] && [ $1 == '-e' ]; then
     shift
-    play-selection "$@"
+    play_selection "$@"
     exit
 fi
 
@@ -63,6 +63,6 @@ else
             jq -r '.[] | .name + "/" + .sounds[].name' |
             $fzf_cmd --bind "ctrl-s:execute-silent(${BASH_SOURCE[0]} -s),esc:clear-query");
 
-        play-selection "$selection"
+        play_selection "$selection"
     fi
 fi
