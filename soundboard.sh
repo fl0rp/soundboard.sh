@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 url="https://brett.fick.es/api"
 
